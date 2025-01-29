@@ -13,49 +13,72 @@ This exercise will demonstrate the following in the example video:
 */
 
 
-VAR time = 0 //  0 Morning, 1 Noon, 2 Night
+VAR time = -1 //  0 Warmup, 1 FirstH, 2 Halftime, 3 SecondH
 
 
 
 
--> seashore
+-> bench
 
-== seashore ==
-You are sitting on the beach. 
+== bench ==
+You are sitting on the bench. 
 
-+ [Wait] -> seashore
++ [Warmup] -> pregame
 -> DONE
 
-== beach2 ==
-This is further down the beach.
+== pregame ==
+You are going to strech and shot.
+Curent stage {advance_time()}
+* {time == 0} [Use roller to warm up] -> roller
 
-+ [Move back up the beach] -> seashore
++ [The game begins] -> game
 
-== shells ==
-You pick up the shells
--> beach2
+== roller ==
+Use roller to warm up
+-> pregame
+
+== shooting ==
+Shooting around 
+-> game
+
+== game ==
+{time < 4 : You are playing game.}
+Curent stage {advance_time()}
+* {time == 2} [Shooting around] -> shooting
+
++ [Continue game] -> game
+
+== gameover ==
+WE WIN!
+-> END
+
+
 
 == function advance_time ==
 
     ~ time = time + 1
+    {time > 3:
+        ~return "WE WIN"
+        }
     
-    {
-        - time > 2:
-            ~ time = 0
-    }    
-    /*
+    
     {    
         - time == 0:
-            ~ return "Morning"
+            ~ return "Warmup"
         
         - time == 1:
-            ~ return "Noon"
+            ~ return "First Half"
         
         - time == 2:
-            ~ return "Night"
+            ~ return "Halftime"
+            
+         - time == 3:
+            ~ return "Second Half"
+        
+         
     
     }
-    */
+    
     
         
     ~ return time

@@ -1,5 +1,5 @@
 # Exercise-01d-Inky-Misc
 
-# Your Name
+# Valentyna Kadlecova
 
-# Your Github username
+# Your Github vakadle
